@@ -19,7 +19,8 @@ const projects = [
     image: 'https://placehold.co/800x500/dbeafe/1e3a8a?text=React+Portfolio',
     skills: ['React', 'CSS', 'Vite'],
     demo: 'https://example.com/react-portfolio',
-    github: 'https://github.com/your-username/react-portfolio',
+    github: 'https://github.com/wook13590/react-portfolio',
+    iconOnly: 'code',
   },
   {
     title: 'Shopping Web App',
@@ -27,7 +28,8 @@ const projects = [
     image: 'https://placehold.co/800x500/dcfce7/166534?text=Shopping+Web+App',
     skills: ['React', 'JavaScript', 'CSS'],
     demo: 'https://example.com/shopping-web-app',
-    github: 'https://github.com/your-username/shopping-web-app',
+    github: 'https://github.com/wook13590/shopping-web-app',
+    iconOnly: 'shopping',
   },
   {
     title: 'Movie Search App',
@@ -35,7 +37,8 @@ const projects = [
     image: 'https://placehold.co/800x500/fef3c7/92400e?text=Movie+Search+App',
     skills: ['React', 'API', 'CSS'],
     demo: 'https://example.com/movie-search-app',
-    github: 'https://github.com/your-username/movie-search-app',
+    github: 'https://github.com/wook13590/movie-search-app',
+    iconOnly: 'movie',
   },
 ]
 
@@ -131,11 +134,12 @@ function App() {
               </div>
 
               <div className="hero__visual">
-                <img
-                  className="hero__profile-image"
-                  src="https://placehold.co/640x760/e0f2fe/1e3a8a?text=Profile+Image"
-                  alt="장태욱 프로필 이미지"
-                />
+                <div className="hero__profile-image" role="img" aria-label="장태욱 프로필 아이콘">
+                  <svg viewBox="0 0 160 190" aria-hidden="true">
+                    <circle cx="80" cy="58" r="32" />
+                    <path d="M23 166c4-36 27-57 57-57s53 21 57 57" />
+                  </svg>
+                </div>
               </div>
             </div>
           </div>
@@ -205,7 +209,31 @@ function App() {
               {projects.map((project) => (
                 <article className="project-card" key={project.title}>
                   <div className="project-card__image-wrap">
-                    <img className="project-card__image" src={project.image} alt={`${project.title} 미리보기`} />
+                    {project.iconOnly ? (
+                      <div
+                        className={`project-icon-art project-icon-art--${project.iconOnly}`}
+                        aria-label={project.iconOnly === 'shopping' ? '장바구니 아이콘' : '코드 아이콘'}
+                        role="img"
+                      >
+                        {project.iconOnly === 'shopping' ? (
+                          <svg viewBox="0 0 200 200" aria-hidden="true">
+                            <path d="M56 70h88l-12 94H68l-12-94Z" fill="none" stroke="currentColor" strokeWidth="12" strokeLinejoin="round" />
+                            <path d="M78 70V54a22 22 0 0 1 44 0v16" fill="none" stroke="currentColor" strokeWidth="12" strokeLinecap="round" />
+                            <path d="M90 96c0 10 7 18 20 18s20-8 20-18" fill="none" stroke="currentColor" strokeWidth="10" strokeLinecap="round"/>
+                          </svg>
+                        ) : project.iconOnly === 'code' ? (
+                          <svg viewBox="0 0 200 200" aria-hidden="true">
+                            <path d="M58 60 30 100l28 40" fill="none" stroke="currentColor" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M142 60l28 40-28 40" fill="none" stroke="currentColor" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M110 42 90 158" fill="none" stroke="currentColor" strokeWidth="12" strokeLinecap="round" />
+                          </svg>
+                        ) : (
+                          <span className="movie-emoji" aria-hidden="true">🎬</span>
+                        )}
+                      </div>
+                    ) : (
+                      <img className="project-card__image" src={project.image} alt={`${project.title} 미리보기`} />
+                    )}
                   </div>
                   <div className="project-card__body">
                     <h3>{project.title}</h3>
@@ -274,9 +302,9 @@ function App() {
                     <span>Email</span>
                     wook1359@naver.com
                   </a>
-                  <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer">
+                  <a href="https://github.com/wook13590" target="_blank" rel="noopener noreferrer">
                     <span>GitHub</span>
-                    github.com/your-username
+                    github.com/wook13590
                   </a>
                 </address>
               </div>
@@ -331,7 +359,7 @@ function App() {
         <div className="container site-footer__inner">
           <p>© 2026 TAEWOOK Portfolio. All Rights Reserved.</p>
           <nav className="site-footer__links" aria-label="푸터 링크">
-            <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/wook13590" target="_blank" rel="noopener noreferrer">
               GitHub
             </a>
             <a href="mailto:wook1359@naver.com">Email</a>
