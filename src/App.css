@@ -5,6 +5,9 @@
   --color-border: #e2e8f0;
   --color-surface: #ffffff;
   --color-background: #f8fafc;
+  --color-soft-accent: #fce7f3;
+  --color-progress-track: #fbcfe8;
+  --color-accent-border: #f9a8d4;
   --content-width: 1200px;
   --section-space: 7rem;
   --radius-medium: 0.75rem;
@@ -17,6 +20,18 @@
   display: flex;
   flex-direction: column;
   color: var(--color-text);
+}
+
+.app--dark {
+  --color-text: #f8fafc;
+  --color-muted: #a8b3c5;
+  --color-border: #374151;
+  --color-surface: #1f2937;
+  --color-background: #111827;
+  --color-soft-accent: #3b2035;
+  --color-progress-track: #54243f;
+  --color-accent-border: #9d174d;
+  --shadow-soft: 0 12px 32px rgb(0 0 0 / 0.24);
 }
 
 .container {
@@ -87,8 +102,41 @@
 .menu-toggle:focus-visible {
   color: var(--color-accent);
   background-color: var(--color-background);
-  border-color: #f9a8d4;
+  border-color: var(--color-accent-border);
   box-shadow: none;
+}
+
+.theme-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  min-height: 2.75rem;
+  margin-left: auto;
+  padding: 0.65rem;
+  color: var(--color-text);
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color var(--transition-smooth), background-color var(--transition-smooth), border-color var(--transition-smooth), transform var(--transition-smooth);
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  color: var(--color-accent);
+  background-color: var(--color-soft-accent);
+  border-color: var(--color-accent-border);
+  transform: translateY(-1px);
+}
+
+.theme-toggle svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
 }
 
 .menu-toggle span {
@@ -203,7 +251,7 @@
   display: grid;
   place-items: center;
   color: var(--color-accent);
-  background-color: #fce7f3;
+  background-color: var(--color-soft-accent);
   border-radius: var(--radius-medium);
 }
 
@@ -332,11 +380,11 @@
   overflow: hidden;
   border: 0;
   border-radius: 999px;
-  background-color: #fbcfe8;
+  background-color: var(--color-progress-track);
 }
 
 .skill-card progress::-webkit-progress-bar {
-  background-color: #fbcfe8;
+  background-color: var(--color-progress-track);
   border-radius: 999px;
 }
 
@@ -450,10 +498,10 @@
 
 .project-card__technologies li {
   padding: 0.35rem 0.6rem;
-  color: #9d174d;
+  color: var(--color-accent);
   font-size: 0.8125rem;
   font-weight: 700;
-  background-color: #fce7f3;
+  background-color: var(--color-soft-accent);
   border-radius: 999px;
 }
 
@@ -488,7 +536,7 @@
   bottom: 1.5rem;
   left: 7.25rem;
   width: 1px;
-  background-color: #f9a8d4;
+  background-color: var(--color-accent-border);
   content: '';
 }
 

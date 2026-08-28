@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 const skills = [
@@ -62,9 +62,14 @@ const experiences = [
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('portfolio-theme') === 'dark')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
+
+  useEffect(() => {
+    localStorage.setItem('portfolio-theme', isDarkMode ? 'dark' : 'light')
+  }, [isDarkMode])
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -75,12 +80,31 @@ function App() {
   }
 
   return (
-    <div className="app">
+    <div className={`app${isDarkMode ? ' app--dark' : ''}`}>
       <header id="header" className="site-header">
         <div className="container site-header__inner">
           <a className="site-header__logo" href="#hero">
             TAEWOOK PORTFOLIO
           </a>
+          <button
+            className="theme-toggle"
+            type="button"
+            aria-pressed={isDarkMode}
+            aria-label={isDarkMode ? '라이트 모드로 전환' : '야간 모드로 전환'}
+            title={isDarkMode ? '라이트 모드' : '야간 모드'}
+            onClick={() => setIsDarkMode((isDark) => !isDark)}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              {isDarkMode ? (
+                <path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z" />
+              ) : (
+                <>
+                  <circle cx="12" cy="12" r="4" />
+                  <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42" />
+                </>
+              )}
+            </svg>
+          </button>
           <button
             className="menu-toggle"
             type="button"
